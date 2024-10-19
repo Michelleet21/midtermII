@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game of Thrones Characters</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav>
+        <h1>Game of Thrones Characters</h1>
+    </nav>
+
+    <div class="character-details">
+        <img src="<%= personaje.imageUrl %>" alt="<%= personaje.fullName %>" />
+        <h2><%= personaje.fullName %></h2>
+        <p><strong>ID:</strong> <%= personaje.id %></p>
+        <p><strong>First Name:</strong> <%= personaje.firstName %></p>
+        <p><strong>Last Name:</strong> <%= personaje.lastName %></p>
+        <p><strong>Born:</strong> <%= personaje.born ? personaje.born : 'Unknown' %></p>
+        <p><strong>Dead:</strong> <%= personaje.died ? personaje.died : 'Unknown' %></p>        
+        <p><strong>Title(s):</strong> <%= personaje.title %></p>
+        <p><strong>Aliases:</strong> <%= Array.isArray(personaje.aliases) && personaje.aliases.length > 0 ? personaje.aliases.join(', ') : 'None' %></p>
+        <p><strong>Family:</strong> <%= personaje.family %></p>
+
+        <% if (personaje.familyCrest) { %>
+            <p><strong>Family Crest:</strong></p>
+            <img src="<%= personaje.familyCrest %>" alt="<%= personaje.family %> Family Crest" />
+        <% } %>
+
+        <div class="navigation-buttons">
+            <a href="/?index=<%= previousIndex %>">Previous</a>
+            <a href="/?index=<%= nextIndex %>">Next</a>
+        </div>
+    </div>
+
+    <div>
+
+    <form action="/" method="GET">
+        <input type="text" name="search" placeholder="Search characters" value="<%= searchQuery %>">
+        <button type="submit">Search</button>
+    </form>
+
+
+    <ul>
+        <% if (personajes.length > 0) { %>
+            <% personajes.forEach(personaje => { %>
+                <li><%= personaje.fullName %></li>
+            <% }); %>
+        <% } else { %>
+            <li>No characters found</li>
+        <% } %>
+    </ul>
+    </div>
+
+</body>
+</html>
